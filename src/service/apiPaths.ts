@@ -21,6 +21,12 @@ export const apiPaths: { [key: string]: string } = {
   updateGallery: "gallery",
 
    //contacts API
-   getAllContacts: "/api/contact-whatsapp",
+  
+  getContacts: "api/contacts",
+  
+  addReach: "api/contacts",
+  getAllReach: "api/contacts",
+  updateReach: "api/contacts",
+
 
 };

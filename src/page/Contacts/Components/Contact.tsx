@@ -6,7 +6,7 @@ import useContact from "../useContact";
 
 const Contact: React.FC = () => {
   const {
-    contactData,
+    ContactData,
     showConfirmation,
     loading,
     handleCancelStatusUp,
@@ -14,12 +14,13 @@ const Contact: React.FC = () => {
     handleDateFilter,
   } = useContact();
 
+  
   const style: any = {
     ACTIVE: "bg-green-300 rounded",
     INACTIVE: "bg-red-300 rounded",
   };
 
-  const contactDataWithSerial = contactData.map((row, index) => ({
+  const contactDataWithSerial = ContactData.map((row, index) => ({
     ...row,
     "Sr No.": index + 1,
   }));
@@ -39,8 +40,20 @@ const Contact: React.FC = () => {
       width: 50,
     },
     {
-      field: "phone",
+      field: "mobile",
       headerName: "Mobile No.",
+      align: "center",
+      width: 50,
+    },
+    {
+      field: "subject",
+      headerName: "Subject",
+      align: "center",
+      width: 50,
+    },
+    {
+      field: "message",
+      headerName: "Message",
       align: "center",
       width: 50,
     },
@@ -62,7 +75,7 @@ const Contact: React.FC = () => {
           onConfirmDelete={() => {
             handleConfirmStatusUp();
           }}
-          loading={!contactData}
+          loading={!ContactData}
           onDateFilter={handleDateFilter}
         />
       </>

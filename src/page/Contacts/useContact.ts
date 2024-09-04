@@ -4,7 +4,7 @@ import { apiPaths } from '../../service/apiPaths';
 import { useNavigate } from 'react-router-dom';
 
 const useContact = () => {
-  const [contactData, setContactData] = useState<any[]>([]);
+  const [ContactData, setContactData] = useState<any[]>([]);
   const [selectedContactView, setSelectedContactView] = useState<string | null>(null);
   const [selectedContactId, setSelectedContactId] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
@@ -20,9 +20,9 @@ const useContact = () => {
     try {
       const result = await ApiService({
         method: 'GET',
-        endpoint: apiPaths.getAllContacts,
+        endpoint: apiPaths.getContacts,
       });
-      setContactData(result);
+      setContactData(result.data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -110,7 +110,7 @@ const useContact = () => {
   return {
     selectedContactView,
     selectedContactId,
-    contactData,
+    ContactData,
     showConfirmation,
     loading,
     handleView,

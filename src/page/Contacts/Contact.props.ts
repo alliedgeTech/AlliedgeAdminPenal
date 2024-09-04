@@ -1,6 +1,9 @@
 export interface IContact {
   _id: string;
-  title: string;
- image: string | File;
+  name: string;
+ email: string;
+ mobile: string,
+ subject: string,
+ message: string
 }
 

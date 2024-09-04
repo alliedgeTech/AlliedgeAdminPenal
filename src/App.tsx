@@ -8,8 +8,9 @@ import PropertyIndex from "./page/Property";
 import Addlife from "./page/Property/Components/Addlife/Addlife";
 import AddGallery from "./page/Gallery/Components/AddGallery/AddGallery";
 import GalleryIndex from "./page/Gallery";
-import ContactIndex from "./page/Contacts";
 import AddLife from "./page/Property/Components/Addlife/Addlife";
+import ContactIndex from "./page/Contacts";
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -94,6 +95,7 @@ function App() {
               )
             }
           />
+            
            <Route
             path="/contactus"
             element={
