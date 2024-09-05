@@ -29,7 +29,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
   return (
     <div className="max-w-md mx-auto mt-8 box-border border-4 p-6 rounded-lg">
-      <span><img src="https://res.cloudinary.com/dagd6qt6p/image/upload/v1725339448/alliedgelogo_nfcxzr.png" alt='download' className='h-20 w-20 mx-auto' /></span>
+      <span><img src="https://res.cloudinary.com/dagd6qt6p/image/upload/v1725518626/alliedgelogo.png2_glbquh.png" alt='download' className='h-20 w-20 mx-auto' /></span>
       <h2 className="text-2xl mb-4">Login</h2>
       <form onSubmit={handleLogin}>
         <div className="mb-4">
