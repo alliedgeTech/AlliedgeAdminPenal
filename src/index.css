@@ -1,19 +1,17 @@
 /**
  * Importing the Google Fonts 'Open Sans' with multiple weights for the body text
  */
- /* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap'); */
- @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
  /**
   * Resetting default margin and padding for the body
   * Setting the font family for the entire document to 'Roboto', falling back to the default sans-serif font
   */
-  body {
-    margin: 0;
-    padding: 0;
-    font-family:"Poppins";
-}
-
+ body {
+     margin: 0;
+     padding: 0;
+     font-family: "Roboto";
+ }
  
  /**
   * Importing Tailwind CSS base, components, and utilities
@@ -26,7 +24,7 @@
     background-color: #002b4a; /* Set your desired background color */
   }
   .customGridToolbar {
-    background-color: #eeeef9; /* Change background color */
+    background-color: #f0f0f0; /* Change background color */
     border-bottom: 1px solid #ddd; /* Add border bottom */
     padding: 8px; /* Add padding */
     color: #333; /* Add text color */
