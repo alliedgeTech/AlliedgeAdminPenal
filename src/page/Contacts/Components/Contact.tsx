@@ -6,7 +6,7 @@ import useContact from "../useContact";
 
 const Contact: React.FC = () => {
   const {
-    ContactData,
+    contactData,
     showConfirmation,
     loading,
     handleCancelStatusUp,
@@ -14,15 +14,14 @@ const Contact: React.FC = () => {
     handleDateFilter,
   } = useContact();
 
-  
   const style: any = {
     ACTIVE: "bg-green-300 rounded",
     INACTIVE: "bg-red-300 rounded",
   };
 
-  const contactDataWithSerial = ContactData.map((row, index) => ({
+  const contactDataWithSerial = contactData.map((row, index) => ({
     ...row,
-    "Sr No.": index + 1,
+    "Sr No.": index+ 1,
   }));
 
   const columns: Column[] = [
@@ -57,6 +56,7 @@ const Contact: React.FC = () => {
       align: "center",
       width: 50,
     },
+  
   ];
 
   return (
@@ -75,7 +75,7 @@ const Contact: React.FC = () => {
           onConfirmDelete={() => {
             handleConfirmStatusUp();
           }}
-          loading={!ContactData}
+          loading={!contactData}
           onDateFilter={handleDateFilter}
         />
       </>

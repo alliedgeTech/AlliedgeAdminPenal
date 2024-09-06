@@ -2,17 +2,18 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiPaths } from "../../../../service/apiPaths";
 import ApiService from "../../../../service/ApiService";
-import { IAddGallery, IGallery } from "../../Gallery.props";
+import { IAddLife, ILife } from "../../Life.props";
 import { SubmitHandler } from "react-hook-form";
 import { toast } from 'react-hot-toast'; 
 
-const useEditProperty = (GalleryId: string) => {
-  const [formData, setFormData] = useState<IAddGallery>({
+const useEditProperty = (LifeId: string) => {
+  const [formData, setFormData] = useState<IAddLife>({
    title: "" ,
    images: "",
+   paragraph: ""
   });
   const [loading, setLoading] = useState<boolean>(false);
-  const [gallery, setGallery] = useState<IGallery | null>(null);
+  const [life, setLife] = useState<ILife | null>(null);
 
   const navigate = useNavigate();
 
@@ -25,11 +26,11 @@ const useEditProperty = (GalleryId: string) => {
     try {
       const response = await ApiService({
         method: "GET",
-        endpoint: `${apiPaths.getAllGallery}`,
+        endpoint: `${apiPaths.getAllLife}`,
       });
-      const gallery = response.filter((sys: any) => sys._id === GalleryId);
-      setGallery(gallery[0]);
-      populateFormData(gallery[0]);
+      const life = response.filter((sys: any) => sys._id === LifeId);
+      setLife(life[0]);
+      populateFormData(life[0]);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -37,35 +38,36 @@ const useEditProperty = (GalleryId: string) => {
     }
   };
 
-  const populateFormData = (GalleryData: IGallery) => {
+  const populateFormData = (LifeData: ILife) => {
     setFormData({
-   title: GalleryData.title,
-   images: GalleryData.images,
+   title: LifeData.title,
+   images: LifeData.images,
+   paragraph: LifeData.paragraph
     });
   };
 
-  const handleChange = (name: keyof IAddGallery, value: any) => {
+  const handleChange = (name: keyof IAddLife, value: any) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
     }));
   };
 
-  const handleSubmit: SubmitHandler<IAddGallery> = async () => {
+  const handleSubmit: SubmitHandler<IAddLife> = async () => {
     try {
       const response = await ApiService({
         method: "PUT",
-        endpoint: `${apiPaths.updateGallery}/${GalleryId}`,
+        endpoint: `${apiPaths.updateLife}/${LifeId}`,
         data: formData,
       });
 
       if (response !== "undefined") {
-        toast.success("Gallery updated successfully");
-        navigate("/gallery");
+        toast.success("Life updated successfully");
+        navigate("/life");
         window.location.reload();
       }
     } catch (error) {
-      console.error("Error updating  Gallery:", error);
+      console.error("Error updating  Life:", error);
     }
   };
 
@@ -76,7 +78,7 @@ const useEditProperty = (GalleryId: string) => {
   return {
     loading,
     formData,
-    gallery,
+    life,
     handleChange,
     handleSubmit,
     handleCancel,

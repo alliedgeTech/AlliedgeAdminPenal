@@ -3,10 +3,10 @@ import ApiService from '../../service/ApiService';
 import { apiPaths } from '../../service/apiPaths';
 import { useNavigate } from 'react-router-dom';
 
-const useContact = () => {
-  const [contactData, setContactData] = useState<any[]>([]);
-  const [selectedContactView, setSelectedContactView] = useState<string | null>(null);
-  const [selectedContactId, setSelectedContactId] = useState<string | null>(null);
+const useProperty = () => {
+  const [PropertyData, setPropertyData] = useState<any[]>([]);
+  const [selectedPropertyView, setSelectedPropertyView] = useState<string | null>(null);
+  const [selectedPropertyId, setSelectedPropertyId] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -20,9 +20,9 @@ const useContact = () => {
     try {
       const result = await ApiService({
         method: 'GET',
-        endpoint: apiPaths.getAllContacts,
+        endpoint: apiPaths.getAllProperties,
       });
-      setContactData(result.data);
+      setPropertyData(result);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -39,9 +39,9 @@ const useContact = () => {
     try {
       const result = await ApiService({
         method: 'GET',
-        endpoint: `${apiPaths.getAllGallery}?fromDate=${formattedFromDate}&toDate=${formattedToDate}`,
+        endpoint: `${apiPaths.getAllProperties}?fromDate=${formattedFromDate}&toDate=${formattedToDate}`,
       });
-      setContactData(result);
+      setPropertyData(result);
     } catch (error) {
       console.error('Error fetching filtered data:', error);
     }
@@ -50,14 +50,14 @@ const useContact = () => {
     try {
       await ApiService({
         method: 'DELETE',
-        endpoint: `${apiPaths.updateGallery}/${deletingId}`,
+        endpoint: `${apiPaths.updateProperty}/${deletingId}`,
       });
       
-      setContactData((prevData) => 
-        prevData.map((gallery) => 
-          gallery.GalleryId === deletingId ? 
-                { ...gallery, status: gallery?.status?.toString() === "ACTIVE" ? "INACTIVE" : "ACTIVE" } 
-                : gallery
+      setPropertyData((prevData) => 
+        prevData.map((property) => 
+          property.PropertyId === deletingId ? 
+                { ...property, status: property?.status?.toString() === "ACTIVE" ? "INACTIVE" : "ACTIVE" } 
+                : property
         )
     );
     await fetchData(); 
@@ -76,12 +76,12 @@ const useContact = () => {
     try {
       await ApiService({
         method: 'PUT',
-        endpoint: `${apiPaths.updateGallery}/${id}`,
+        endpoint: `${apiPaths.updateProperty}/${id}`,
         data: { isActive: newStatus },
       });
-      setContactData(prevData =>
-        prevData.map(gallery =>
-          gallery._id === id ? { ...gallery, isActive: newStatus } : gallery
+      setPropertyData(prevData =>
+        prevData.map(property =>
+          property._id === id ? { ...property, isActive: newStatus } : property
         )
       );
     } catch (error) {
@@ -92,25 +92,25 @@ const useContact = () => {
   };
 
   const handleAdd = () => {
-    navigate('/addgallery')
+    navigate('/addproperty')
   }
 
   const handleView = (id: string) => {
-    setSelectedContactView(id);
+    setSelectedPropertyView(id);
   };
   const handleCancelStatusUp = () => {
     setShowConfirmation(false);
     setDeletingId(null);
   };
   const handleEdit = (id: string) => {
-    setSelectedContactId(id);
+    setSelectedPropertyId(id);
   };
 
 
   return {
-    selectedContactView,
-    selectedContactId,
-    contactData,
+    selectedPropertyView,
+    selectedPropertyId,
+    PropertyData,
     showConfirmation,
     loading,
     handleView,
@@ -123,4 +123,4 @@ const useContact = () => {
   };
 };
 
-export default useContact;
+export default useProperty;

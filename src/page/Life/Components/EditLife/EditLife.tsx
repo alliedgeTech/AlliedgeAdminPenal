@@ -1,19 +1,19 @@
 import React from "react";
-import { IAddGallery, IGalleryId } from "../../Gallery.props";
+import { IAddLife, ILifeId } from "../../Life.props";
 import { useForm } from "react-hook-form";
 import Loader from "../../../../components/Loader";
-import useEditProperty from "./useEditProperty";
+import useEditProperty from "./useEditLife";
 import { CancelButton, FormButton } from "../../../../components/Botton";
 import { Toaster } from "react-hot-toast";
 
-const EditGallery: React.FC<IGalleryId> = ({ GalleryId }) => {
+const EditLife: React.FC<ILifeId> = ({ LifeId }) => {
   const { formData, loading, handleChange, handleSubmit, handleCancel } =
-    useEditProperty(GalleryId);
+    useEditProperty(LifeId);
   const {
     register,
     handleSubmit: useFormSubmit,
     formState: { errors },
-  } = useForm<IAddGallery>();
+  } = useForm<IAddLife>();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files ? Array.from(e.target.files) : [];
@@ -23,6 +23,8 @@ const EditGallery: React.FC<IGalleryId> = ({ GalleryId }) => {
   const fields = [
     { label: "title", name: "title", type: "text" },
     { label: "Image", name: "images", type: "file" },
+    { label: "paragraph", name: "paragraph", type: "text" }
+
   ] as const;
 
   return (
@@ -30,7 +32,7 @@ const EditGallery: React.FC<IGalleryId> = ({ GalleryId }) => {
       <Toaster/>
       <div className="bg-white shadow-md rounded-lg pt-6 pb-6 w-full">
         <div className="border-b-2 w-[100%]">
-          <h1 className="text-3xl mb-2 text-gray-700 ml-5">Edit Gallery Image</h1>
+          <h1 className="text-3xl mb-2 text-gray-700 ml-5">Edit Life Image</h1>
         </div>
         {loading && <Loader />}
         <form onSubmit={useFormSubmit(handleSubmit)} className="space-y-6">
@@ -90,4 +92,4 @@ const EditGallery: React.FC<IGalleryId> = ({ GalleryId }) => {
   );
 };
 
-export default EditGallery;
+export default EditLife;

@@ -51,9 +51,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     }
   }, [sidebarExpanded]);
 
-  const activeLink =
-    "flex bg-purLit11 text-fontColor border-l-2 border-fontColor dark:bg-meta-4";
-  const normalLink = "";
+  const activeLink = 'flex bg-purLit11 text-fontColor border-l-2 border-fontColor dark:bg-meta-4';
+  const normalLink = '';
 
   return (
     <aside
@@ -65,10 +64,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center shadow-2 justify-between gap-2 px-6 py-5.5 xl:py-6.5">
         <NavLink to="/">
-          <img
-            src="https://res.cloudinary.com/dagd6qt6p/image/upload/v1725339448/alliedgelogo_nfcxzr.png"
-            alt="Alliedge Technologies Pvt Ltd Logo"
-          />
+           <img src="https://res.cloudinary.com/dagd6qt6p/image/upload/v1725339448/alliedgelogo_nfcxzr.png" alt="Logo" /> 
+
         </NavLink>
 
         <button
@@ -103,9 +100,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             {links.map((item) => (
               <div key={item.title}>
                 {/* Section title */}
-                <h3 className="mb-4 ml-4 text-xl font-semibold text-fontColor">
-                  {item.title}
-                </h3>
+                  <h3 className="mb-4 ml-4 text-xl font-semibold text-fontColor">
+                    {item.title}
+                  </h3>
                 {item.links.map((link) => (
                   <NavLink
                     to={`/${link.link}`}
@@ -115,7 +112,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     }
                   >
                     <ul className="mb-1 flex flex-col gap-1.5">
-                      <span className="group relative flex mt-2 gap-2.5 rounded-sm px-4 py-2 font-semibold text-fontColor duration-300  ease-in-out">
+                      <span
+                        className="group relative flex mt-2 gap-2.5 rounded-sm px-4 py-2 font-semibold text-fontColor duration-300  ease-in-out"
+                      >
                         {link.icon}
                         {link.name}
                       </span>

@@ -5,12 +5,12 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Login from "./components/Login/Login";
 import DashboardIndex from "./page/Dashboard";
 import PropertyIndex from "./page/Property";
-import Addlife from "./page/Property/Components/Addlife/Addlife";
+import AddProperty from "./page/Property/Components/AddProperty/AddProperty";
 import AddGallery from "./page/Gallery/Components/AddGallery/AddGallery";
+import AddLife from "./page/Life/Components/AddLife/AddLife";
 import GalleryIndex from "./page/Gallery";
-import AddLife from "./page/Property/Components/Addlife/Addlife";
 import ContactIndex from "./page/Contacts";
-
+import LifeIndex from "./page/Life";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -24,6 +24,10 @@ function App() {
     setIsLoggedIn(true);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    setIsLoggedIn(false);
+  };
 
   return (
     <div>
@@ -40,37 +44,14 @@ function App() {
             element={
               isLoggedIn ? (
                 <DefaultLayout>
-                  <DashboardIndex />
+                  <LifeIndex />
                 </DefaultLayout>
               ) : (
                 <Navigate to="/login" />
               )
             }
           />
-          <Route
-            path="/addproperty"
-            element={
-              isLoggedIn ? (
-                <DefaultLayout>
-                  <Addlife />
-                </DefaultLayout>
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
-          />
-          <Route
-            path="/property"
-            element={
-              isLoggedIn ? (
-                <DefaultLayout>
-                  <PropertyIndex />
-                </DefaultLayout>
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
-          />
+          
           <Route
             path="/addgallery"
             element={
@@ -95,13 +76,12 @@ function App() {
               )
             }
           />
-            
            <Route
-            path="/contactus"
+            path="/addlife"
             element={
               isLoggedIn ? (
                 <DefaultLayout>
-                  <ContactIndex />
+                  <AddLife />
                 </DefaultLayout>
               ) : (
                 <Navigate to="/login" />
@@ -109,11 +89,23 @@ function App() {
             }
           />
           <Route
-            path="/addlife"
+            path="/life"
             element={
               isLoggedIn ? (
                 <DefaultLayout>
-                  <AddLife />
+                  <LifeIndex />
+                </DefaultLayout>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+           <Route
+            path="/contactus"
+            element={
+              isLoggedIn ? (
+                <DefaultLayout>
+                  <ContactIndex />
                 </DefaultLayout>
               ) : (
                 <Navigate to="/login" />

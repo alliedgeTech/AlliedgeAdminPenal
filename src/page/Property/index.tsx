@@ -1,10 +1,10 @@
 import React from "react";
-import Life from "./Components/Life";
-import useLife from "./useLife";
+import Property from "./Components/Property";
+import useProperty from "./useProperty";
 
-const LifeIndex: React.FC = () => {
-  const LifeProps = useLife();
+const PropertyIndex: React.FC = () => {
+  const PropertyProps = useProperty();
 
-  return <Life />;
+  return <Property />;
 };
-export default LifeIndex;
+export default PropertyIndex;

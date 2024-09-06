@@ -4,14 +4,14 @@ import DeleteImg from "../../../images/SideBar/Delete";
 import { Column } from "../../../components/CommonDataGrid/props";
 import CommonDataGrid from "../../../components/CommonDataGrid";
 import Loader from "../../../components/Loader";
-import EditPropertyIndex from "./Editlife/index";
-import useProperty from "../useLife";
+import EditLifeIndex from "./EditLife/index";
+import useLife from "../useLife";
 import Button from "../../../components/Botton";
 
 const Life: React.FC = () => {
   const {
     selectedLifeId,
-    lifeData,
+    LifeData,
     showConfirmation,
     loading,
     handleEdit,
@@ -20,23 +20,45 @@ const Life: React.FC = () => {
     handleStatusUp,
     handleDateFilter,
     handleAdd,
-  } = useProperty();
+  } = useLife();
 
   const style: any = {
     ACTIVE: "bg-green-300 rounded",
     INACTIVE: "bg-red-300 rounded",
   };
 
-  const propertyDataWithSerial = lifeData.map((row, index) => ({
+  const lifeDataWithSerial = LifeData.map((row, index) => ({
     ...row,
     "Sr No.": index + 1,
   }));
 
   const columns: Column[] = [
+    {
+      field: 'images',
+      headerName: 'Life Image',
+      align: 'center',
+      width: 0,
+      renderCell: (params) => {
+        const firstImage = params.value && params.value.length > 0 ? params.value[0] : null;
+        return firstImage ? (
+          // eslint-disable-next-line jsx-a11y/img-redundant-alt
+          <img
+            src={firstImage}
+            alt="Life Image"
+            style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px' }}
+          />
+        ) : (
+          <span>No Image</span>
+        );
+      },
+      
+    },
     { field: "Sr No.", headerName: "Sr No.", align: "center", width: 100 },
-    { field: "title", headerName: "title", align: "center", width: 50 },
-    { field: "paragraph", headerName: "paragraph", align: "center", width: 50 },
-    { field: "images", headerName: "images", align: "center", width: 50 },
+    { field: "title", headerName: "Title", align: "center", width: 50 },
+    
+
+   
+    
     {
       field: "Actions",
       headerName: "Actions",
@@ -65,30 +87,30 @@ const Life: React.FC = () => {
     <div className="mx-auto p-4">
       {loading && <Loader />}
       {selectedLifeId ? (
-        <EditPropertyIndex lifeId={selectedLifeId} />
+        <EditLifeIndex LifeId={selectedLifeId} />
       ) : (
         <>
           <div className="grid justify-items-end -mb-11 mr-1">
             <Button
               onClick={handleAdd}
               className="py-1.5 px-9 rounded"
-              children="Add Property"
+              children="Add Life"
               type="button"
             />
           </div>
           <CommonDataGrid
-            rows={propertyDataWithSerial}
+            rows={lifeDataWithSerial}
             columns={columns}
             getRowId={(row) => row._id}
             showConfirmation={showConfirmation}
             confirmationMessage="Are you sure you want to delete this property?"
             onCancelDelete={() => {
-              handleCancelStatusUp(); 
+              handleCancelStatusUp();
             }}
             onConfirmDelete={() => {
               handleConfirmStatusUp();
             }}
-            loading={!lifeData}
+            loading={!LifeData}
             onDateFilter={handleDateFilter}
           />
         </>

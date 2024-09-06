@@ -4,29 +4,21 @@
 export const apiPaths: { [key: string]: string } = {
   // Login: 'api/admin/login',
 
-  // //Property API
-  // addProperty: "property",
-  // getAllProperties: "property",
-  // updateProperty: "property",
-
-  //life API
-  addlife: "life",
-  getlife: "life",
-  updatelife: "life",
-  deletelife:"life",
+  //Property API
+  addProperty: "property",
+  getAllProperties: "property",
+  updateProperty: "property",
 
   //gallery API
   addGallery: "gallery",
   getAllGallery: "gallery",
   updateGallery: "gallery",
 
-   //contacts API
-  
-  getContacts: "api/contacts",
-  
-  addReach: "api/contacts",
-  getAllReach: "api/contacts",
-  updateReach: "api/contacts",
+  addLife: "life",
+  getAllLife: "life",
+  updateLife: "life",
 
+   //contacts API
+   getAllContacts: "api/contacts",
 
 };

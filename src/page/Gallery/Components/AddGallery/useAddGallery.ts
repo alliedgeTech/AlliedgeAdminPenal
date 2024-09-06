@@ -9,7 +9,7 @@ import { toast } from "react-hot-toast";
 const useAddProperty = () => {
   const [formData, setFormData] = useState<IAddGallery>({
     title: "",
-    images: [],
+    images: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -18,7 +18,7 @@ const useAddProperty = () => {
   const navigate = useNavigate();
 
   const handleChange = (
-    name: string,
+    name: keyof IAddGallery,
     value: string | File | File[] | null
   ) => {
     setFormData((prevFormData) => ({
@@ -32,25 +32,30 @@ const useAddProperty = () => {
     setError(null);
 
     const form = new FormData();
-    form.append("title", formData.title);
-    
-    if (Array.isArray(formData.images)) {
-      formData.images.forEach((images: File | any) => {
-        form.append("images", images);
-      });
-    }
-
+    Object.keys(formData).forEach((key) => {
+      if (key === "images") {
+        if (Array.isArray(formData.images)) {
+          formData.images.forEach((file: File) => {
+            form.append("image", file);
+          });
+        } else if (formData.images instanceof File) {
+          form.append("image", formData.images);
+        }
+      } else {
+        form.append(key, formData[key as keyof IAddGallery] as any);
+      }
+    });
     try {
       const response = await ApiService({
         method: "POST",
-        endpoint: apiPaths.addGallery,
+        endpoint: `${apiPaths.addGallery}`,
         data: form,
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
 
-      if (response) {
+      if (response !== "undefined") {
         toast.success("Gallery added successfully");
         navigate("/gallery");
       }

@@ -69,7 +69,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           />
         </div>
         <h1 className="text-2xl font-bold text-center mb-4 text-gray-800">
-          Welcome to Alliedge Technologies Pvt Ltd{" "}
+          Welcome to Alliedge Technologies{" "}
         </h1>
         <p className="text-center text-gray-600 mb-6">
           Please sign in to your account

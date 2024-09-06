@@ -4,14 +4,14 @@ import DeleteImg from "../../../images/SideBar/Delete";
 import { Column } from "../../../components/CommonDataGrid/props";
 import CommonDataGrid from "../../../components/CommonDataGrid";
 import Loader from "../../../components/Loader";
-import EditGalleryIndex from "./EditGallery/index";
-import useGallery from "../useGallery";
+import EditPropertyIndex from "./EditProperty/index";
+import useProperty from "../useProperty";
 import Button from "../../../components/Botton";
 
-const Gallery: React.FC = () => {
+const Property: React.FC = () => {
   const {
-    selectedGalleryId,
-    GalleryData,
+    selectedPropertyId,
+    PropertyData,
     showConfirmation,
     loading,
     handleEdit,
@@ -20,43 +20,24 @@ const Gallery: React.FC = () => {
     handleStatusUp,
     handleDateFilter,
     handleAdd,
-  } = useGallery();
+  } = useProperty();
 
   const style: any = {
     ACTIVE: "bg-green-300 rounded",
     INACTIVE: "bg-red-300 rounded",
   };
 
-  const galleryDataWithSerial = GalleryData.map((row, index) => ({
+  const propertyDataWithSerial = PropertyData.map((row, index) => ({
     ...row,
     "Sr No.": index + 1,
   }));
 
   const columns: Column[] = [
-    {
-      field: 'images',
-      headerName: 'Gallery Image',
-      align: 'center',
-      width: 0,
-      renderCell: (params) => {
-        const firstImage = params.value && params.value.length > 0 ? params.value[0] : null;
-        return firstImage ? (
-          // eslint-disable-next-line jsx-a11y/img-redundant-alt
-          <img
-            src={firstImage}
-            alt="Gallery Image"
-            style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px' }}
-          />
-        ) : (
-          <span>No Image</span>
-        );
-      },
-      
-    },
     { field: "Sr No.", headerName: "Sr No.", align: "center", width: 100 },
-    { field: "title", headerName: "Title", align: "center", width: 50 },
-   
-    
+    { field: "name", headerName: "Name", align: "center", width: 50 },
+    { field: "location", headerName: "Location", align: "center", width: 50 },
+    { field: "propertyType", headerName: "Property Type", align: "center", width: 50 },
+    { field: "price", headerName: "Price", align: "center", width: 50 },
     {
       field: "Actions",
       headerName: "Actions",
@@ -84,31 +65,31 @@ const Gallery: React.FC = () => {
   return (
     <div className="mx-auto p-4">
       {loading && <Loader />}
-      {selectedGalleryId ? (
-        <EditGalleryIndex GalleryId={selectedGalleryId} />
+      {selectedPropertyId ? (
+        <EditPropertyIndex PropertyId={selectedPropertyId} />
       ) : (
         <>
           <div className="grid justify-items-end -mb-11 mr-1">
             <Button
               onClick={handleAdd}
               className="py-1.5 px-9 rounded"
-              children="Add Gallery"
+              children="Add Property"
               type="button"
             />
           </div>
           <CommonDataGrid
-            rows={galleryDataWithSerial}
+            rows={propertyDataWithSerial}
             columns={columns}
             getRowId={(row) => row._id}
             showConfirmation={showConfirmation}
             confirmationMessage="Are you sure you want to delete this property?"
             onCancelDelete={() => {
-              handleCancelStatusUp();
+              handleCancelStatusUp(); 
             }}
             onConfirmDelete={() => {
               handleConfirmStatusUp();
             }}
-            loading={!GalleryData}
+            loading={!PropertyData}
             onDateFilter={handleDateFilter}
           />
         </>
@@ -117,4 +98,4 @@ const Gallery: React.FC = () => {
   );
 };
 
-export default Gallery;
+export default Property;

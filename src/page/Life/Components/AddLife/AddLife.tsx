@@ -2,19 +2,20 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Loader from "../../../../components/Loader";
-import useAddGallery from "./useAddGallery";
-import { IAddGallery } from "../../Gallery.props";
+import useAddLife from "./useAddLife";
+import { IAddLife } from "../../Life.props";
 import { CancelButton, FormButton } from "../../../../components/Botton";
 import { toast, Toaster } from 'react-hot-toast'; // Importing toast and Toaster
 
-const AddGallery: React.FC = () => {
-  const { formData, loading, handleChange, handleSubmit, handleCancel, error } = useAddGallery();
-  const { register, handleSubmit: useFormSubmit, formState: { errors } } = useForm<IAddGallery>();
+const AddLife: React.FC = () => {
+  const { formData, loading, handleChange, handleSubmit, handleCancel, error } = useAddLife();
+  const { register, handleSubmit: useFormSubmit, formState: { errors } } = useForm<IAddLife>();
   const [imagePreview, setImagePreview] = useState<string | null>(null); // Adjusted for single image
 
   const fields = [
     { label: "title", name: "title", type: "text" },
     { label: "Image", name: "images", type: "file" },
+    { label: "paragraph", name:"paragraph", type:"text"}
   ] as const;
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +37,7 @@ const AddGallery: React.FC = () => {
       <Toaster position="top-right" /> {/* Toaster component for displaying notifications */}
       <div className="bg-white shadow-md rounded-lg pt-6 pb-6 w-full">
         <div className="border-b-2 w-[100%]">
-          <h1 className="text-3xl mb-2 text-gray-700 ml-5">Add Gallery Image</h1>
+          <h1 className="text-3xl mb-2 text-gray-700 ml-5">Add Life Image</h1>
         </div>
         {loading && <Loader />}
         {error && <div className="text-red-500 text-center">{error}</div>}
@@ -60,14 +61,16 @@ const AddGallery: React.FC = () => {
                       className="appearance-none border rounded w-full py-2 px-3 text-gray-600 leading-tight focus:outline-none focus:shadow-outline"
                       type={field.type}
                       id={field.name}
-                      {...register(field.name as keyof IAddGallery)}
-                      value={(formData[field.name as keyof IAddGallery] as string) || ""}
+                      {...register(field.name as keyof IAddLife)}
+                      value={(formData[field.name as keyof IAddLife] as string) || ""}
                       onChange={(e) =>
-                        handleChange(field.name as keyof IAddGallery, e.target.value)
+                        handleChange(field.name as keyof IAddLife, e.target.value)
                       }
                     />
-                  )}
-                  {errors[field.name as keyof IAddGallery] && (
+                    
+                  )
+                  }
+                  {errors[field.name as keyof IAddLife] && (
                     <span className="text-red-500 text-xs italic">
                       This field is required
                     </span>
@@ -103,4 +106,4 @@ const AddGallery: React.FC = () => {
   );
 };
 
-export default AddGallery;
+export default AddLife;
