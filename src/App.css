@@ -1,74 +1,61 @@
-/**
- * Styling for the sidebar to add a box shadow effect
- */
- .sidebar {
-  box-shadow: rgb(113 122 131 / 11%) 0px 7px 30px 0px;
+.App {
+  text-align: center;
 }
 
-/**
- * Setting a higher z-index for the navbar and nav-item to ensure they appear above other elements
- */
-.nav-item,
-.navbar {
-  z-index: 10000;
+::-webkit-scrollbar-track {
+  box-shadow: inset 5px 5px 5px #ebf1f5;
+  border-radius: 10px;
 }
 
-/**
- * Media query for smaller screens to adjust the z-index of the sidebar
- */
-@media screen and (max-width: 800px) {
-  .sidebar {
-    z-index: 10000000;
+::-webkit-scrollbar {
+  width: 8px;
+  height: 12px;
+  margin: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #a8a8ba;
+  border-radius: 6px;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
   }
 }
 
-/**
- * Setting a high z-index for specific elements to ensure they appear above other elements
- */
-.e-dlg-center-center,
-.e-quick-popup-wrapper.e-device {
-  z-index: 1000000 !important;
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 
-/**
- * Styling for customizing the appearance of the scrollbar
- */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-thumb {
-  background-color: rgb(216, 216, 216);
-  border-radius: 40px;
-}
-::-webkit-scrollbar-track {
-  background-color: transparent;
+.App-link {
+  color: #61dafb;
 }
 
-/**
- * Styling for the color picker component
- */
-#preview {
-  background: transparent
-    url('https://ej2.syncfusion.com/react/demos/src/color-picker/images/pen.png')
-    no-repeat;
-  display: inline-block;
-  height: 80px;
-  margin: 10px 0;
-  min-width: 300px;
-  max-width: 600px;
-  background-color: #008000;
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
-
-/**
- * Styling to remove border from specific input groups
- */
-.e-input-group:not(.e-float-icon-left),
-.e-input-group.e-success:not(.e-float-icon-left),
-.e-input-group.e-warning:not(.e-float-icon-left),
-.e-input-group.e-error:not(.e-float-icon-left),
-.e-input-group.e-control-wrapper:not(.e-float-icon-left),
-.e-input-group.e-control-wrapper.e-success:not(.e-float-icon-left),
-.e-input-group.e-control-wrapper.e-warning:not(.e-float-icon-left),
-.e-input-group.e-control-wrapper.e-error:not(.e-float-icon-left) {
-  border: none;
+.sticky-column {
+  position: sticky;
+  right: 0;
+  background: white; /* Ensures the sticky column has a background */
+  z-index: 1; /* Ensures it is above other columns */
+  box-shadow: -1px 0 0 #ddd; /* Optional: adds a shadow to indicate it's fixed */
 }
